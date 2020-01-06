@@ -1,0 +1,39 @@
+target_sources(lockjaw
+PRIVATE
+    debrief.c
+    #ljds.c
+    #ljds.h
+    #dsarm7.c
+    #gba_asm.s
+    #gbablk.chr
+    #gbaisr.iwram.c
+    #gbanotefreq.c
+    #gbaopt.c
+    #gbasound.c
+    #ljgba.c
+    #ljgba.h
+    gimmicks.c
+    lj.c
+    ljcontrol.h
+    ljgbads.inc
+    lj.h
+    ljmusic.c
+    ljmusic.h
+    ljpc.c
+    ljpc.h
+    ljplay.c
+    ljplay.h
+    ljreplay.c
+    ljreplay.h
+    ljtypes.h
+    ljvorbis.c
+    ljvorbis.h
+    macro.c
+    options.c
+    pcjoy.c
+    pcjoy.h
+    pin8gba_sound.h
+    text.chr
+    winicon.rc
+    wktables.c
+)

@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "allegro.h": "c",
+        "utf8.h": "c",
+        "aldumb.h": "c",
+        "dumb.h": "c",
+        "base.h": "c"
+    }
+}
