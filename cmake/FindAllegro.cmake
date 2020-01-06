@@ -15,14 +15,14 @@
 #   Allegro::<c>       - The requested Allegro Add-on
 
 find_package(PkgConfig REQUIRED)
-pkg_search_module(PC_Allegro QUIET allegro-5)
+pkg_search_module(PC_Allegro QUIET allegro-4)
 
 set(Allegro_FOUND ${PC_Allegro_FOUND})
 
 find_path(Allegro_INCLUDE_DIR
-  NAMES allegro5.h allegro.h
+  NAMES allegro4.h allegro.h
   PATHS ${PC_Allegro_INCLUDE_DIRS}
-  PATH_SUFFIXES allegro5
+  PATH_SUFFIXES allegro4
 )
 find_library(Allegro_LIBRARY
   NAMES allegro
@@ -48,16 +48,16 @@ endif()
 # Seatch Allegro Add-Ons and include them in the variables
 # will set Allegro_FOUND to 0 if any Add-on is not found.
 foreach(component ${Allegro_FIND_COMPONENTS})
-  pkg_search_module(PC_Allegro_${component} QUIET allegro_${component}-5)
+  pkg_search_module(PC_Allegro_${component} QUIET allegro_${component}-4)
   if("${PC_Allegro_${component}_FOUND}")
     find_path(Allegro_${component}_INCLUDE_DIR
       NAMES allegro_${component}.h
       PATHS "${PC_Allegro_${component}_INCLUDE_DIRS}"
-      PATH_SUFFIXES allegro5
+      PATH_SUFFIXES allegro4
     )
     
     find_library(Allegro_${component}_LIBRARY
-      NAMES allegro_${component} allegro_${component}-5
+      NAMES allegro_${component} allegro_${component}-4
       PATH "${PC_Allegro_${component}_LIBRARY_DIRS}"
     )
     

@@ -4,6 +4,8 @@
         "utf8.h": "c",
         "aldumb.h": "c",
         "dumb.h": "c",
-        "base.h": "c"
+        "base.h": "c",
+        "ljpc.h": "c",
+        "ljvorbis.h": "c"
     }
 }
