@@ -23,7 +23,7 @@ or The Tetris Company LLC.
 */
 
 #include "pcjoy.h"
-#include <allegro.h>
+#include <allegro5/allegro.h>
 #include <string.h>
 
 extern const FONT *aver32, *aver16;

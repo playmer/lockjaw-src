@@ -24,7 +24,7 @@ or The Tetris Company LLC.
 
 #ifndef LJPC_H
 #define LJPC_H
-#include <allegro.h>
+#include <allegro5/allegro.h>
 #include "ljmusic.h"
 #include "ljplay.h"
 #include "pcjoy.h"
@@ -34,10 +34,10 @@ typedef struct LJPCView
 {
   // Platform-dependent graphics
   unsigned int baseX, baseY, blkW, blkH;
-  BITMAP *back;
-  BITMAP *bg;
-  BITMAP *blocks;
-  BITMAP *connBlocks;
+  ALLEGRO_COLOR *back;
+  ALLEGRO_COLOR *bg;
+  ALLEGRO_COLOR *blocks;
+  ALLEGRO_COLOR *connBlocks;
   
   // Platform-dependent sound
   LJMusic *bgm;
@@ -129,7 +129,7 @@ union LJPrefs {
 
 
 /* set by display mode */
-extern int pfBgColor, pfFgColor, bgColor, fgColor, hiliteColor;
+extern ALLEGRO_COLOR pfBgColor, pfFgColor, bgColor, fgColor, hiliteColor;
 extern const FONT *aver32, *aver16;
 extern volatile int redrawWholeScreen;
 extern char autoPause;

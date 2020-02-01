@@ -40,7 +40,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <vorbis/codec.h>
 #include <vorbis/vorbisfile.h>
-#include <allegro.h>
+#include <allegro5/allegro.h>
 
 typedef struct LJVorbis {
   FILE *fp;

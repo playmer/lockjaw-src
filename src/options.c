@@ -25,6 +25,7 @@ or The Tetris Company LLC.
 #include "ljpc.h"
 #include "ctype.h"
 #include <stdio.h>
+#include <allegro5/allegro_primitives.h>
 
 static const char ljIniName[] = "lj.ini";
 
@@ -600,35 +601,63 @@ static void optionsDrawScrollbar(int scroll) {
                    + (scroll + OPTIONS_MENU_VIS)
                       * OPTIONS_ROW_HT * (OPTIONS_MENU_VIS - 2)
                       / OPTIONS_MENU_LEN;
-  int lightGray = makecol(204, 204, 204);
-  int darkGray = makecol(102, 102, 102);
+
+  ALLEGRO_COLOR lightGray = al_map_rgb(204, 204, 204);
+  ALLEGRO_COLOR darkGray = al_map_rgb(102, 102, 102);
   
   // bg
-  rectfill(screen,
-           OPTIONS_ROW_RIGHT,
-           OPTIONS_TOP,
-           OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1,
-           OPTIONS_TOP - 1 + OPTIONS_ROW_HT * OPTIONS_MENU_VIS,
-           lightGray);
+  //rectfill(screen,
+  //         OPTIONS_ROW_RIGHT,
+  //         OPTIONS_TOP,
+  //         OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1,
+  //         OPTIONS_TOP - 1 + OPTIONS_ROW_HT * OPTIONS_MENU_VIS,
+  //         lightGray);
+  al_draw_filled_rectangle((OPTIONS_ROW_RIGHT), 
+                           (OPTIONS_TOP), 
+                           (OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1) + 1.f,
+                           (OPTIONS_TOP - 1 + OPTIONS_ROW_HT * OPTIONS_MENU_VIS) + 1.f,
+                           lightGray);
+
   // lower arrow
-  rect(screen,
-       OPTIONS_ROW_RIGHT,
-       OPTIONS_TOP + OPTIONS_ROW_HT * (OPTIONS_MENU_VIS - 1),
-       OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1,
-       OPTIONS_TOP - 1 + OPTIONS_ROW_HT * OPTIONS_MENU_VIS,
-       0);
+  //rect(screen,
+  //     OPTIONS_ROW_RIGHT,
+  //     OPTIONS_TOP + OPTIONS_ROW_HT * (OPTIONS_MENU_VIS - 1),
+  //     OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1,
+  //     OPTIONS_TOP - 1 + OPTIONS_ROW_HT * OPTIONS_MENU_VIS,
+  //     0);
+  al_draw_rectangle((OPTIONS_ROW_RIGHT) + 0.5f, 
+                    (OPTIONS_TOP + OPTIONS_ROW_HT * (OPTIONS_MENU_VIS - 1)) + 0.5f, 
+                    (OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1) + 0.5f, 
+                    (OPTIONS_TOP - 1 + OPTIONS_ROW_HT * OPTIONS_MENU_VIS) + 0.5, 
+                    al_map_rgb(0, 0, 0),
+                    1.f);
+
   // upper arrow
-  rect(screen,
-       OPTIONS_ROW_RIGHT,
-       OPTIONS_TOP,
-       OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1,
-       OPTIONS_TOP - 1 + OPTIONS_ROW_HT,
-       0);
+  //rect(screen,
+  //     OPTIONS_ROW_RIGHT,
+  //     OPTIONS_TOP,
+  //     OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1,
+  //     OPTIONS_TOP - 1 + OPTIONS_ROW_HT,
+  //     0);
+  
+  al_draw_rectangle((OPTIONS_ROW_RIGHT) + 0.5f, 
+                    (OPTIONS_TOP) + 0.5f, 
+                    (OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1) + 0.5f, 
+                    (OPTIONS_TOP - 1 + OPTIONS_ROW_HT) + 0.5, 
+                    al_map_rgb(0, 0, 0),
+                    1.f);
+
   // thumb box
-  rectfill(screen,
-           OPTIONS_ROW_RIGHT, scrollboxTop,
-           OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1, scrollboxBot,
-           darkGray);
+  //rectfill(screen,
+  //         OPTIONS_ROW_RIGHT, scrollboxTop,
+  //         OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1, scrollboxBot,
+  //         darkGray);
+  
+  al_draw_filled_rectangle((OPTIONS_ROW_RIGHT), 
+                           (scrollboxTop), 
+                           (OPTIONS_ROW_RIGHT + OPTIONS_ROW_HT - 1) + 1.f,
+                           (scrollboxBot) + 1.f,
+                           lightGray);
 }
 
 /**
@@ -640,41 +669,68 @@ static void optionsDrawRow(const OptionsLine *dlg,
                            int y, int value, int hilite, int scroll) {
   unsigned int ht = text_height(aver16);
   int buttonY = OPTIONS_TOP + OPTIONS_ROW_HT * (y - scroll);
-  int bgcolor = bgColor;
+  ALLEGRO_COLOR bgcolor = bgColor;
   const char *valueOverride = isDisabledOption(prefs, y);
-  int textcolor = fgColor;
+  ALLEGRO_COLOR textcolor = fgColor;
   
   if (valueOverride) {
     hilite |= 2;
-    textcolor = makecol(128, 128, 128);
+    textcolor = al_map_rgb(128, 128, 128);
   }
   
   if (hilite == 3) {
-    bgcolor = makecol(204, 204, 204);
+    bgcolor = al_map_rgb(204, 204, 204);
   } else if (hilite == 1) {
     bgcolor = hiliteColor;
   }
   
-  acquire_screen();
-  rectfill(screen,
-           OPTIONS_ROW_LEFT, buttonY,
-           OPTIONS_ROW_RIGHT - 1, buttonY + OPTIONS_ROW_HT - 1,
-           bgcolor);
-  textout_ex(screen, aver16, dlg[y].name,
-             OPTIONS_ROW_LEFT + 8, buttonY + (OPTIONS_ROW_HT - ht) / 2,
-             textcolor, bgcolor);
-  if (value >= 0 && value < dlg[y].maxValue) {
-    textout_ex(screen, aver16,
+  //acquire_screen();
+  //rectfill(screen,
+  //         OPTIONS_ROW_LEFT, 
+  //         buttonY,
+  //         OPTIONS_ROW_RIGHT - 1, 
+  //         buttonY + OPTIONS_ROW_HT - 1,
+  //         bgcolor);
+
+  al_draw_filled_rectangle((OPTIONS_ROW_LEFT), 
+                           (buttonY), 
+                           (OPTIONS_ROW_RIGHT - 1) + 1.f,
+                           (buttonY + OPTIONS_ROW_HT - 1) + 1.f,
+                           bgcolor);
+
+  //textout_ex(screen, 
+  //           aver16, 
+  //           dlg[y].name,
+  //           OPTIONS_ROW_LEFT + 8, 
+  //           buttonY + (OPTIONS_ROW_HT - ht) / 2,
+  //           textcolor, 
+  //           bgcolor);
+  al_draw_text(aver16,
+               textcolor,
+               OPTIONS_ROW_LEFT + 8,
+               buttonY + (OPTIONS_ROW_HT - ht) / 2,
+               0,
+               dlg[y].name);
+
+  if (value >= 0 && value < dlg[y].maxValue) 
+  {
+    textout_ex(screen, 
+               aver16,
                valueOverride ? valueOverride : dlg[y].valueNames[value],
-               OPTIONS_ROW_MID, buttonY + (OPTIONS_ROW_HT - ht) / 2,
-               textcolor, bgcolor);
+               OPTIONS_ROW_MID, 
+               buttonY + (OPTIONS_ROW_HT - ht) / 2,
+               textcolor, 
+               bgcolor);
   }
   
   // For an enabled selected item, draw the frame
-  if (hilite == 1) {
+  if (hilite == 1)
+  {
     rect(screen,
-         OPTIONS_ROW_LEFT, buttonY,
-         OPTIONS_ROW_RIGHT - 1, buttonY + OPTIONS_ROW_HT - 1,
+         OPTIONS_ROW_LEFT, 
+         buttonY,
+         OPTIONS_ROW_RIGHT - 1, 
+         buttonY + OPTIONS_ROW_HT - 1,
          fgColor);
   }
   

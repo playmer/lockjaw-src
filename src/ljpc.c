@@ -24,8 +24,10 @@ or The Tetris Company LLC.
 
 #include "ljpc.h"
 #include "ljreplay.h"
-#include <jpgalleg.h>
+//#include <jpgalleg.h>
 #include <time.h>
+
+#include "allegro5/allegro_font.h"
 
 #if 1
   #define LJ_VERSION "0.34a ("__DATE__")"
@@ -34,12 +36,12 @@ or The Tetris Company LLC.
 #endif
 
 
-int bgColor, fgColor = 0, hiliteColor, pfBgColor = 0, pfFgColor;
+ALLEGRO_COLOR bgColor, fgColor = 0, hiliteColor, pfBgColor = 0, pfFgColor;
 static volatile int curTime = 0;
 volatile int redrawWholeScreen = 1;
 static volatile int wantPause = 0;
 const DATAFILE *dat;
-const FONT *aver32 = NULL, *aver16 = NULL;
+const ALLEGRO_FONT *aver32 = NULL, *aver16 = NULL;
 char withSound = 0;
 char autoPause;
 int refreshRate = 0;
